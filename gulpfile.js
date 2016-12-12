@@ -54,10 +54,14 @@ gulp.task("lint", function () {
 });
 
 gulp.task("js", ["lint"], function () {
+    var options = {
+        preserveComments: 'license'
+    };
+
     js.forEach(function (item) {
         pump([
             gulp.src(item.src),
-            uglify(),
+            uglify(options),
             concat(item.name),
             gulp.dest(item.dest)
         ]);
