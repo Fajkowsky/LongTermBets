@@ -5,6 +5,7 @@ var gulp = require("gulp"),
     server = require("gulp-server-livereload"),
     debug = require("gulp-debug"),
     cleanCSS = require("gulp-clean-css"),
+    eslint = require("gulp-eslint"),
     pump = require("pump");
 
 var config = {
@@ -43,8 +44,16 @@ var css = [
     {src: config.libs.css.dirs, name: config.libs.css.name, dest: config.dist}
 ];
 
+gulp.task("lint", function () {
+    return pump([
+        gulp.src(config.app.js.dirs),
+        eslint(),
+        eslint.format(),
+        eslint.failAfterError()
+    ]);
+});
 
-gulp.task("js", function () {
+gulp.task("js", ["lint"], function () {
     js.forEach(function (item) {
         pump([
             gulp.src(item.src),
