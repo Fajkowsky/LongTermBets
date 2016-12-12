@@ -87,7 +87,7 @@ gulp.task("html", function () {
     ]);
 });
 
-gulp.task("webserver", function () {
+gulp.task("webserver", ["prod"], function () {
     pump([
         gulp.src(config.dist),
         server({
@@ -104,4 +104,4 @@ gulp.task("watch", function () {
 
 gulp.task("default", ["prod"]);
 gulp.task("prod", ["js", "css", "html"]);
-gulp.task("dev", ["prod", "webserver", "watch"]);
+gulp.task("dev", ["webserver", "watch"]);
