@@ -1,4 +1,5 @@
 # LongTermBets
+[![Dependency Status](https://gemnasium.com/badges/github.com/Fajkowsky/LongTermBets.svg)](https://gemnasium.com/github.com/Fajkowsky/LongTermBets)
 
 Simple website application for storing your long term bets. 
 
