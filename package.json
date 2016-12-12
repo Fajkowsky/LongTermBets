@@ -4,6 +4,7 @@
   "description": "Application for long term bets.",
   "main": "index.html",
   "scripts": {
+    "postinstall": "./node_modules/.bin/bower install",
     "gulp": "./node_modules/.bin/gulp",
     "bower": "./node_modules/.bin/bower",
     "test": "echo \"Error: no test specified\" && exit 1"
