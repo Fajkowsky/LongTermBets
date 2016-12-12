@@ -1,0 +1,24 @@
+{
+  "name": "longtermbets",
+  "description": "Application for long term bets.",
+  "main": "index.html",
+  "authors": [
+    "Dawid Fajkowski"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "log",
+    "term",
+    "bets",
+    "himym"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
