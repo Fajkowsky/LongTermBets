@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    angular.module("app").controller("MainController", MainController);
+    angular.module("App").controller("MainController", MainController);
 
     MainController.$inject = [];
 
