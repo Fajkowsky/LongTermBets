@@ -3,7 +3,6 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     htmlmin = require("gulp-htmlmin"),
     server = require("gulp-server-livereload"),
-    debug = require("gulp-debug"),
     cleanCSS = require("gulp-clean-css"),
     eslint = require("gulp-eslint"),
     pump = require("pump");
