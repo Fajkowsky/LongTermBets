@@ -80,9 +80,13 @@ gulp.task("css", function () {
 });
 
 gulp.task("html", function () {
+    var options = {
+        collapseWhitespace: true
+    };
+
     pump([
         gulp.src("app/index.html"),
-        htmlmin({collapseWhitespace: true}),
+        htmlmin(options),
         gulp.dest(config.dist)
     ]);
 });
