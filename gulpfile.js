@@ -55,7 +55,7 @@ gulp.task("lint", function () {
 
 gulp.task("js", ["lint"], function () {
     var options = {
-        preserveComments: 'license'
+        preserveComments: "license"
     };
 
     js.forEach(function (item) {
