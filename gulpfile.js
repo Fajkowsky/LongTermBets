@@ -4,8 +4,8 @@ var gulp = require("gulp"),
     htmlmin = require("gulp-htmlmin"),
     server = require("gulp-server-livereload"),
     cleanCSS = require("gulp-clean-css"),
-    jsonminify = require('gulp-jsonminify'),
-    sass = require('gulp-sass'),
+    jsonminify = require("gulp-jsonminify"),
+    sass = require("gulp-sass"),
     eslint = require("gulp-eslint"),
     debug = require("gulp-debug"),
     pump = require("pump");
@@ -40,8 +40,8 @@ var config = {
             name: "app.min.css"
         },
         translation: {
-            source: 'app/assets/translations/*.json',
-            destination: 'translations/'
+            source: "app/assets/translations/*.json",
+            destination: "translations/"
         }
     }
 };
@@ -102,7 +102,7 @@ gulp.task("scss", function () {
     scss.forEach(function (item) {
         pump([
             gulp.src(item.src),
-            sass().on('error', sass.logError),
+            sass().on("error", sass.logError),
             concat(item.name),
             gulp.dest(item.dest)
         ]);
