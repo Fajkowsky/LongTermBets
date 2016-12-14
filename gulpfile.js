@@ -4,6 +4,7 @@ var gulp = require("gulp"),
     htmlmin = require("gulp-htmlmin"),
     server = require("gulp-server-livereload"),
     cleanCSS = require("gulp-clean-css"),
+    sass = require('gulp-sass'),
     eslint = require("gulp-eslint"),
     pump = require("pump");
 
@@ -30,6 +31,10 @@ var config = {
         js: {
             dirs: "app/**/*.js",
             name: "app.min.js"
+        },
+        scss: {
+            dirs: "app/**/*.scss",
+            name: "app.min.css"
         }
     }
 };
@@ -41,6 +46,10 @@ var js = [
 
 var css = [
     {src: config.libs.css.dirs, name: config.libs.css.name, dest: config.dist}
+];
+
+var scss = [
+    {src: config.app.scss.dirs, name: config.app.scss.name, dest: config.dist}
 ];
 
 gulp.task("lint", function () {
@@ -78,6 +87,17 @@ gulp.task("css", function () {
     });
 });
 
+gulp.task("scss", function () {
+    scss.forEach(function (item) {
+        pump([
+            gulp.src(item.src),
+            sass().on('error', sass.logError),
+            concat(item.name),
+            gulp.dest(item.dest)
+        ]);
+    });
+});
+
 gulp.task("html", function () {
     var options = {
         collapseWhitespace: true
@@ -103,8 +123,9 @@ gulp.task("watch", function () {
     gulp.watch("app/**/*.html", ["html"]);
     gulp.watch("app/**/*.js", ["js"]);
     gulp.watch("app/**/*.css", ["css"]);
+    gulp.watch("app/**/*.sass", ["scss"]);
 });
 
 gulp.task("default", ["prod"]);
-gulp.task("prod", ["js", "css", "html"]);
+gulp.task("prod", ["scss", "js", "css", "html"]);
 gulp.task("dev", ["webserver", "watch"]);
