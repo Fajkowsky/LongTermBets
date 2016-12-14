@@ -1,4 +1,4 @@
 (function () {
     "use strict";
-    angular.module("App", ["ngMaterial"]);
+    angular.module("App", ["ngMaterial", "lodash"]);
 }());
