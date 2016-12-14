@@ -2,11 +2,11 @@
     "use strict";
     angular.module("App").controller("MainController", MainController);
 
-    MainController.$inject = [];
+    MainController.$inject = ["$log", "TranslationService"];
 
-    function MainController() {
+    function MainController($log, TranslationService) {
         var init = function () {
-
+            $log.info(TranslationService.hello());
         };
 
         init();
