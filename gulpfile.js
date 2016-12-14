@@ -4,8 +4,10 @@ var gulp = require("gulp"),
     htmlmin = require("gulp-htmlmin"),
     server = require("gulp-server-livereload"),
     cleanCSS = require("gulp-clean-css"),
+    jsonminify = require('gulp-jsonminify'),
     sass = require('gulp-sass'),
     eslint = require("gulp-eslint"),
+    debug = require("gulp-debug"),
     pump = require("pump");
 
 var config = {
@@ -35,6 +37,10 @@ var config = {
         scss: {
             dirs: "app/**/*.scss",
             name: "app.min.css"
+        },
+        translation: {
+            source: 'app/assets/translations/*.json',
+            destination: 'translations/'
         }
     }
 };
@@ -50,6 +56,10 @@ var css = [
 
 var scss = [
     {src: config.app.scss.dirs, name: config.app.scss.name, dest: config.dist}
+];
+
+var json = [
+    {src: config.app.translation.source, dest: config.dist + config.app.translation.destination}
 ];
 
 gulp.task("lint", function () {
@@ -110,6 +120,16 @@ gulp.task("html", function () {
     ]);
 });
 
+gulp.task("json", function () {
+    json.forEach(function (item) {
+        pump([
+            gulp.src(item.src),
+            jsonminify(),
+            gulp.dest(item.dest)
+        ]);
+    });
+});
+
 gulp.task("webserver", ["prod"], function () {
     pump([
         gulp.src(config.dist),
@@ -124,8 +144,9 @@ gulp.task("watch", function () {
     gulp.watch("app/**/*.js", ["js"]);
     gulp.watch("app/**/*.css", ["css"]);
     gulp.watch("app/**/*.sass", ["scss"]);
+    gulp.watch("app/**/*.json", ["json"]);
 });
 
 gulp.task("default", ["prod"]);
-gulp.task("prod", ["scss", "js", "css", "html"]);
+gulp.task("prod", ["scss", "js", "css", "html", "json"]);
 gulp.task("dev", ["webserver", "watch"]);

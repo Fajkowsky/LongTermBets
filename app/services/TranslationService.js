@@ -2,25 +2,27 @@
     "use strict";
     angular.module("App").factory("TranslationService", TranslationService);
 
-    TranslationService.$inject = ["$http", "TRANSLATIONS"];
+    TranslationService.$inject = ["$http", "$window", "TRANSLATIONS"];
 
-    function TranslationService($http, TRANSLATIONS) {
+    function TranslationService($http, $window, TRANSLATIONS) {
         var service = {
             defaultLanguage: TRANSLATIONS.defaultLanguage,
             userLanguage: TRANSLATIONS.defaultLanguage,
             translation: {},
-            setTranslation: setTranslation
+            setTranslation: setTranslation,
+            setUserLanguage: setUserLanguage
         };
 
         return service;
 
         function getUserLanguage() {
-            var language = window.navigator.userLanguage || window.navigator.language;
+            var language = $window.navigator.userLanguage || $window.navigator.language;
             return language.substring(0, 2);
         }
 
-        function setUserLanguage() {
+        function setUserLanguage($scope) {
             service.userLanguage = getUserLanguage();
+            setTranslation($scope, service.userLanguage);
         }
 
         function setTranslation($scope, translation) {
@@ -32,8 +34,8 @@
                 setTranslation($scope, service.defaultLanguage);
             }
 
-            var url = TRANSLATIONS.dir + translation.toUpperCase() + '.json';
-            $http.get(url, success, error);
+            var url = TRANSLATIONS.dir + translation.toUpperCase() + ".json";
+            $http.get(url).then(success, error);
         }
     }
 }());
