@@ -6,7 +6,7 @@
 
     function MainController($log, TranslationService) {
         var init = function () {
-            $log.info(TranslationService.hello());
+
         };
 
         init();
