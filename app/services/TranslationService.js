@@ -5,18 +5,18 @@
     TranslationService.$inject = ["$http", "$window", "TRANSLATIONS"];
 
     function TranslationService($http, $window, TRANSLATIONS) {
-        var service = {
+        let service = {
             defaultLanguage: TRANSLATIONS.defaultLanguage,
             userLanguage: TRANSLATIONS.defaultLanguage,
             translation: {},
-            setTranslation: setTranslation,
-            setUserLanguage: setUserLanguage
+            setTranslation,
+            setUserLanguage
         };
 
         return service;
 
         function getUserLanguage() {
-            var language = $window.navigator.userLanguage || $window.navigator.language;
+            const language = $window.navigator.userLanguage || $window.navigator.language;
             return language.substring(0, 2);
         }
 
@@ -34,7 +34,7 @@
                 setTranslation($scope, service.defaultLanguage);
             }
 
-            var url = TRANSLATIONS.dir + translation.toUpperCase() + ".json";
+            const url = TRANSLATIONS.dir + translation.toUpperCase() + ".json";
             $http.get(url).then(success, error);
         }
     }

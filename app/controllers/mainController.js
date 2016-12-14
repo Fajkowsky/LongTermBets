@@ -5,7 +5,7 @@
     MainController.$inject = [];
 
     function MainController() {
-        var init = function () {
+        const init = function () {
 
         };
 
