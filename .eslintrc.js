@@ -2,9 +2,9 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": 6
     },
+    "plugins": ["angular"],
     "env": {
-        "browser": true,
-        "angular": true
+        "browser": true
     },
     "extends": [
         "eslint:recommended",
