@@ -32,7 +32,7 @@ const config = {
     },
     app: {
         js: {
-            dirs: "app/**/*.js",
+            dirs: ["app/**/*.js", "!app/assets/i18n/*.js"],
             name: "app.min.js"
         },
         scss: {
@@ -41,7 +41,11 @@ const config = {
         },
         translation: {
             source: "app/assets/translations/*.json",
-            destination: "translations/"
+            destination: "translations/",
+        },
+        i18n: {
+            source: "app/assets/i18n/*.js",
+            destination: "i18n/",
         }
     }
 };
@@ -49,6 +53,10 @@ const config = {
 const js = [
     {src: config.libs.js.dirs, name: config.libs.js.name, dest: config.dist},
     {src: config.app.js.dirs, name: config.app.js.name, dest: config.dist}
+];
+
+const i18n = [
+    {src: config.app.i18n.source, dest: config.dist + config.app.i18n.destination}
 ];
 
 const css = [
@@ -82,6 +90,17 @@ gulp.task("js", ["lint"], function () {
             gulp.src(item.src),
             uglify(options),
             concat(item.name),
+            gulp.dest(item.dest)
+        ]);
+    });
+});
+
+gulp.task("i18n", function () {
+    i18n.forEach(function (item) {
+        pump([
+            gulp.src(item.src),
+            debug(),
+            uglify(),
             gulp.dest(item.dest)
         ]);
     });
@@ -149,5 +168,5 @@ gulp.task("watch", function () {
 });
 
 gulp.task("default", ["prod"]);
-gulp.task("prod", ["scss", "js", "css", "html", "json"]);
+gulp.task("prod", ["scss", "js", "css", "html", "json", "i18n"]);
 gulp.task("dev", ["webserver", "watch"]);
