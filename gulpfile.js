@@ -1,4 +1,4 @@
-var gulp = require("gulp"),
+const gulp = require("gulp"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
     htmlmin = require("gulp-htmlmin"),
@@ -10,7 +10,7 @@ var gulp = require("gulp"),
     debug = require("gulp-debug"),
     pump = require("pump");
 
-var config = {
+const config = {
     dist: "./dist/",
     libs: {
         js: {
@@ -46,20 +46,20 @@ var config = {
     }
 };
 
-var js = [
+const js = [
     {src: config.libs.js.dirs, name: config.libs.js.name, dest: config.dist},
     {src: config.app.js.dirs, name: config.app.js.name, dest: config.dist}
 ];
 
-var css = [
+const css = [
     {src: config.libs.css.dirs, name: config.libs.css.name, dest: config.dist}
 ];
 
-var scss = [
+const scss = [
     {src: config.app.scss.dirs, name: config.app.scss.name, dest: config.dist}
 ];
 
-var json = [
+const json = [
     {src: config.app.translation.source, dest: config.dist + config.app.translation.destination}
 ];
 
@@ -73,7 +73,7 @@ gulp.task("lint", function () {
 });
 
 gulp.task("js", ["lint"], function () {
-    var options = {
+    const options = {
         preserveComments: "license"
     };
 
@@ -110,7 +110,7 @@ gulp.task("scss", function () {
 });
 
 gulp.task("html", function () {
-    var options = {
+    const options = {
         collapseWhitespace: true
     };
 

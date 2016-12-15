@@ -3,7 +3,8 @@ module.exports = {
         "ecmaVersion": 6
     },
     "env": {
-        "browser": true
+        "browser": true,
+        "angular": true
     },
     "extends": [
         "eslint:recommended",
