@@ -99,7 +99,6 @@ gulp.task("i18n", function () {
     i18n.forEach(function (item) {
         pump([
             gulp.src(item.src),
-            debug(),
             uglify(),
             gulp.dest(item.dest)
         ]);
