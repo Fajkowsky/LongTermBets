@@ -23,17 +23,18 @@
         function setUserLanguage($scope) {
             service.userLanguage = getUserLanguage();
             setTranslation($scope, service.userLanguage);
-            appendi18n($scope, service.userLanguage);
         }
 
-        function appendi18n() {
-            var scirpt = $window.document.createElement("script");
+        function appendi18n(file) {
+            let script = $window.document.createElement("script");
+            script.src = TRANSLATIONS.i18n + file;
             $window.document.body.appendChild(script);
         }
 
         function setTranslation($scope, translation) {
             function success(response) {
                 $scope.translation = service.translation = response.data;
+                appendi18n(response.data.i18n);
             }
 
             function error() {
