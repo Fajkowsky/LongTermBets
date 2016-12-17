@@ -23,6 +23,11 @@
         function setUserLanguage($scope) {
             service.userLanguage = getUserLanguage();
             setTranslation($scope, service.userLanguage);
+            appendi18n($scope, service.userLanguage);
+        }
+
+        function appendi18n() {
+
         }
 
         function setTranslation($scope, translation) {
