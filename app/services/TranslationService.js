@@ -27,7 +27,8 @@
         }
 
         function appendi18n() {
-
+            var scirpt = $window.document.createElement("script");
+            $window.document.body.appendChild(script);
         }
 
         function setTranslation($scope, translation) {
